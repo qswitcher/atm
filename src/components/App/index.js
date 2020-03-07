@@ -15,7 +15,7 @@ function App() {
             <Deposit />
           </Route>
           <Route>
-            <Home onLogout={() => setUser(null)} />
+            <Home user={user} onLogout={() => setUser(null)} />
           </Route>
         </Switch>
       )}
