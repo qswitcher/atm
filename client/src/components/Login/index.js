@@ -1,27 +1,28 @@
 import React, { useState } from 'react'
-import { useLazyQuery } from '@apollo/react-hooks'
+import { useMutation } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
 
 const LOGIN = gql`
-  query Login($pin: ID!) {
-    User(id: $pin) {
-      name
-      id
-    }
+  mutation login($pin: String!) {
+    login(pin: $pin)
   }
 `
 
 const Login = ({ onLogin }) => {
   const [pin, setPin] = useState('')
-  const [getUser, { loading, data }] = useLazyQuery(LOGIN, {
+  const [login, { loading, data }] = useMutation(LOGIN, {
     onCompleted: data => {
-      onLogin(data.User)
+      onLogin(data.login)
     },
   })
 
+  if (loading) {
+    return <div>Loading...</div>
+  }
+
   const onSubmit = event => {
     event.preventDefault()
-    getUser({
+    login({
       variables: {
         pin,
       },

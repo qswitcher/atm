@@ -44,6 +44,22 @@ const mutations = {
 
       return { amount }
     },
+    deposit(_, { amount, account_id }) {
+      // lookup account, you would do this with a database
+      if (account._id !== account_id) {
+        throw new Error('Account not found')
+      }
+
+      // record transaction, this would be done in a database
+      transactions.push({
+        account_id,
+        amount,
+        date: new Date(),
+        type: 'DEPOSIT',
+      })
+
+      return { amount }
+    },
   },
 }
 

@@ -1,31 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useQuery } from '@apollo/react-hooks'
-import { gql } from 'apollo-boost'
+import useUser from '../../queries/user'
 
-const GET_ACCOUNTS = gql`
-  query GetAccount($user_id: ID) {
-    allAccounts(filter: { user_id: $user_id }) {
-      balance
-    }
-  }
-`
-
-const Home = ({ user, onLogout }) => {
-  const { loading, error, data } = useQuery(GET_ACCOUNTS, {
-    variables: { user_id: user.id },
-  })
+const Home = ({ user_id, onLogout }) => {
+  const { loading, error, user } = useUser(user_id)
   if (loading) {
     return <div>{'Loading....'}</div>
   }
   if (error) {
     return <div>{'Whoopsie!'}</div>
   }
-  if (data.allAccounts.length === 0) {
-    return <div>{'No accounts found!'}</div>
-  }
 
-  const { balance } = data.allAccounts[0]
+  const { balance } = user.account
 
   return (
     <div>

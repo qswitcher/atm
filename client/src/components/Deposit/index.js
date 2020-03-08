@@ -1,30 +1,36 @@
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
+import useUser from '../../queries/user'
+import { useHistory } from 'react-router-dom'
 
-const UPDATE_ACCOUNT = gql`
-  mutation UpdateAccount($id: ID!, $balance: Int!) {
-    updateAccount(id: $id, balance: $balance) {
-      id
-      balance
+const DEPOSIT = gql`
+  mutation Deposit($amount: Int!, $account_id: ID!) {
+    deposit(amount: $amount, account_id: $account_id) {
+      amount
     }
   }
 `
 
-const Deposit = () => {
+const Deposit = ({ user_id }) => {
   const [amount, setAmount] = useState('')
-  const [updateAccount, data] = useMutation(UPDATE_ACCOUNT)
+  const [deposit] = useMutation(DEPOSIT)
+  const { loading, error, user } = useUser(user_id)
+
+  const history = useHistory()
+
+  if (loading) {
+    return <div>Loading...</div>
+  }
 
   const onSubmit = event => {
     event.preventDefault()
-    const id = 123
-    const balance = 123
-    updateAccount({
+    deposit({
       variables: {
-        id,
-        balance,
+        account_id: user.account._id,
+        amount: parseInt(amount, 10),
       },
-    })
+    }).then(() => history.push('/'))
   }
 
   return (

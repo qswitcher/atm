@@ -4,22 +4,29 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Login from '../Login'
 import Home from '../Home'
 import Deposit from '../Deposit'
+import Withdraw from '../Withdraw'
 
 function App() {
-  const [user, setUser] = useState()
+  const [user_id, setUserID] = useState()
   return (
     <Router>
-      {user && (
+      {user_id && (
         <Switch>
           <Route path="/deposit">
-            <Deposit />
+            <Deposit user_id={user_id} />
+          </Route>
+          <Route path="/withdraw">
+            <Withdraw user_id={user_id} />
+          </Route>
+          <Route path="/login">
+            <Login onLogin={u => setUserID(u)} />
           </Route>
           <Route>
-            <Home user={user} onLogout={() => setUser(null)} />
+            <Home user_id={user_id} onLogout={() => setUserID(null)} />
           </Route>
         </Switch>
       )}
-      {!user && <Login onLogin={u => setUser(u)} />}
+      {!user_id && <Login onLogin={u => setUserID(u)} />}
     </Router>
   )
 }

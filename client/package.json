@@ -17,9 +17,7 @@
     "react-scripts": "3.4.0"
   },
   "scripts": {
-    "start:client": "react-scripts start",
-    "start:server": "json-graphql-server db.js",
-    "start": "concurrently \"NODE_PORT=8080 npm run start:server\" \"npm run start:client\"",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -42,5 +40,5 @@
   "devDependencies": {
     "prettier": "^1.19.1"
   },
-  "proxy": "http://localhost:8080"
+  "proxy": "http://localhost:4000"
 }
