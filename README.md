@@ -2,7 +2,8 @@
 
 ## Test user
 
-user: jdoe
+username: jdoe
+
 pin: 1234
 
 ## Local dev instructions
