@@ -1,20 +1,32 @@
 const { AuthenticationError, UserInputError } = require('apollo-server')
 const transactions = require('../data/transactions')
-const account = require('../data/account')
+const accounts = require('../data/accounts')
 const isToday = require('date-fns/isToday')
+const users = require('../data/users')
+const bcrypt = require('bcrypt')
 
 const mutations = {
   Mutation: {
-    login(_, { pin }) {
-      if (pin === '1234') {
-        return 123
-      } else {
+    login(_, { username, pin }) {
+      const user = users.filter(u => u.username === username)[0]
+      if (!user) {
         throw new AuthenticationError('Unauthorized')
       }
+      // check pin
+      return new Promise((resolve, reject) => {
+        bcrypt.compare(pin, user.pin).then(result => {
+          if (result) {
+            resolve(user._id)
+          } else {
+            reject(new AuthenticationError('Unauthorizaed'))
+          }
+        })
+      })
     },
     withdrawal(_, { amount, account_id }) {
       // lookup account, you would do this with a database
-      if (account._id !== account_id) {
+      const account = accounts.filter(({ _id }) => account_id === _id)[0]
+      if (!account) {
         throw new Error('Account not found')
       }
 
@@ -46,7 +58,8 @@ const mutations = {
     },
     deposit(_, { amount, account_id }) {
       // lookup account, you would do this with a database
-      if (account._id !== account_id) {
+      const account = accounts.filter(({ _id }) => account_id === _id)[0]
+      if (!account) {
         throw new Error('Account not found')
       }
 

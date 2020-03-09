@@ -23,7 +23,7 @@ module.exports = gql`
   }
 
   type Mutation {
-    login(pin: String!): ID!
+    login(username: ID!, pin: String!): ID!
     deposit(amount: Int!, account_id: ID!): Deposit
     withdrawal(amount: Int!, account_id: ID!): Withdrawal
   }

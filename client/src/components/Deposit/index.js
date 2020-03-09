@@ -15,7 +15,7 @@ const DEPOSIT = gql`
 const Deposit = () => {
   const [amount, setAmount] = useState('')
   const [deposit] = useMutation(DEPOSIT)
-  const { loading, user } = useUser()
+  const { loading, user, refetch } = useUser()
 
   const history = useHistory()
 
@@ -30,7 +30,9 @@ const Deposit = () => {
         account_id: user.account._id,
         amount: parseInt(amount, 10),
       },
-    }).then(() => history.push('/'))
+    })
+      .then(() => refetch())
+      .then(() => history.push('/'))
   }
 
   return (

@@ -4,8 +4,8 @@ import { gql } from 'apollo-boost'
 import { useHistory } from 'react-router-dom'
 
 const LOGIN = gql`
-  mutation login($pin: String!) {
-    login(pin: $pin)
+  mutation login($username: ID!, $pin: String!) {
+    login(username: $username, pin: $pin)
   }
 `
 
@@ -13,8 +13,11 @@ const Login = props => {
   const [pin, setPin] = useState('')
   const [username, setUsername] = useState('')
   const history = useHistory()
+  let errorMsg = ''
 
-  const [login, { loading, data }] = useMutation(LOGIN, {
+  const [login, { loading, error, data }] = useMutation(LOGIN, {
+    errorPolicy: 'all',
+    onError: () => {}, // don't blow up on errors
     onCompleted: data => {
       localStorage.setItem('user_id', data.login)
       console.log(props)
@@ -27,6 +30,10 @@ const Login = props => {
     },
   })
 
+  if (error) {
+    errorMsg = 'Invalid username or pin'
+  }
+
   if (loading) {
     return <div>Loading...</div>
   }
@@ -35,6 +42,7 @@ const Login = props => {
     event.preventDefault()
     login({
       variables: {
+        username,
         pin,
       },
     })
@@ -42,6 +50,7 @@ const Login = props => {
 
   return (
     <form onSubmit={onSubmit}>
+      <div>{errorMsg}</div>
       <div>{loading}</div>
       <div>{JSON.stringify(data)}</div>
       <label>

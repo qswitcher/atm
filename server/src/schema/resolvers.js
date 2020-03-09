@@ -1,13 +1,19 @@
 const { GraphQLScalarType } = require('graphql')
 const { Kind } = require('graphql/language')
 
-const account = require('../data/account')
+const accounts = require('../data/accounts')
 const transactions = require('../data/transactions')
+const users = require('../data/users')
 
 const resolvers = {
   Query: {
-    user(obj, args) {
-      return { _id: 123, name: 'Bob', account }
+    user(obj, { id }) {
+      return users.filter(u => u._id === id)[0]
+    },
+  },
+  User: {
+    account(obj) {
+      return accounts.filter(({ user_id }) => user_id === obj._id)[0]
     },
   },
   Account: {
