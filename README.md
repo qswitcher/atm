@@ -11,6 +11,7 @@ pin: 1234
 Install dependencies
 
 ```
+$ npm install
 $ npm run bootstrap
 ```
 
