@@ -2,7 +2,7 @@
   "name": "atm",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server/src/index.js",
   "scripts": {
     "start": "concurrently \"cd ./client; npm run start\" \"cd ./server; npm run dev\"",
     "bootstrap": "lerna bootstrap",
