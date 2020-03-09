@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import useUser from '../../queries/user'
+import useUser from '../../hooks/user'
 import useLogout from '../../hooks/logout'
 
 const Home = () => {

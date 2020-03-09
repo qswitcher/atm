@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
-import useUser from '../../queries/user'
+import useUser from '../../hooks/user'
 import { useHistory } from 'react-router-dom'
 
 const DEPOSIT = gql`
@@ -37,7 +37,7 @@ const Deposit = () => {
 
   return (
     <div>
-      <h1>Enter Amount</h1>
+      <div>How much to deposit?</div>
       <form onSubmit={onSubmit}>
         <input
           type="number"
