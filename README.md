@@ -1,5 +1,7 @@
 # ATM simulation
 
+[Try it out here!](https://admiring-golick-b6d05f.netlify.com/)
+
 ## Test user
 
 username: jdoe
