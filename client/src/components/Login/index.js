@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
+import { useHistory } from 'react-router-dom'
 
 const LOGIN = gql`
   mutation login($pin: String!) {
@@ -8,11 +9,21 @@ const LOGIN = gql`
   }
 `
 
-const Login = ({ onLogin }) => {
+const Login = props => {
   const [pin, setPin] = useState('')
+  const [username, setUsername] = useState('')
+  const history = useHistory()
+
   const [login, { loading, data }] = useMutation(LOGIN, {
     onCompleted: data => {
-      onLogin(data.login)
+      localStorage.setItem('user_id', data.login)
+      console.log(props)
+      const { state } = props
+      if (state && state.from) {
+        history.push(state.from)
+      } else {
+        history.push('/')
+      }
     },
   })
 
@@ -33,6 +44,15 @@ const Login = ({ onLogin }) => {
     <form onSubmit={onSubmit}>
       <div>{loading}</div>
       <div>{JSON.stringify(data)}</div>
+      <label>
+        <input
+          type="text"
+          name="username"
+          value={username}
+          onChange={event => setUsername(event.target.value)}
+          placeholder="Username"
+        />
+      </label>
       <label>
         <input
           type="password"

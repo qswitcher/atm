@@ -1,9 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import useUser from '../../queries/user'
+import useLogout from '../../hooks/logout'
 
-const Home = ({ user_id, onLogout }) => {
-  const { loading, error, user } = useUser(user_id)
+const Home = () => {
+  const { loading, error, user } = useUser()
+  const logout = useLogout()
   if (loading) {
     return <div>{'Loading....'}</div>
   }
@@ -19,7 +21,7 @@ const Home = ({ user_id, onLogout }) => {
       <div>{`Balance: ${balance}`}</div>
       <Link to="/withdraw">Withdraw</Link>
       <Link to="/deposit">Deposit</Link>
-      <button onClick={() => onLogout()}>Logout</button>
+      <button onClick={() => logout()}>Logout</button>
     </div>
   )
 }

@@ -12,10 +12,10 @@ const DEPOSIT = gql`
   }
 `
 
-const Deposit = ({ user_id }) => {
+const Deposit = () => {
   const [amount, setAmount] = useState('')
   const [deposit] = useMutation(DEPOSIT)
-  const { loading, error, user } = useUser(user_id)
+  const { loading, user } = useUser()
 
   const history = useHistory()
 
