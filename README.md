@@ -8,10 +8,15 @@ pin: 1234
 
 ## Local dev instructions
 
-To start run
+Install dependencies
 
 ```
-$ npm install
+$ npm run bootstrap
+```
+
+Start app
+
+```
 $ npm start
 ```
 
