@@ -3,6 +3,8 @@ import { useMutation } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
 import useUser from '../../hooks/user'
 import { useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import './Deposit.css'
 
 const DEPOSIT = gql`
   mutation Deposit($amount: Int!, $account_id: ID!) {
@@ -36,16 +38,25 @@ const Deposit = () => {
   }
 
   return (
-    <div>
-      <div>How much to deposit?</div>
-      <form onSubmit={onSubmit}>
+    <div className="Deposit">
+      <div className="Deposit__row">How much to deposit?</div>
+      <form className="Deposit__form" onSubmit={onSubmit}>
         <input
+          className="Form__item"
+          placeholder="Amount"
           type="number"
           value={amount}
           onChange={event => setAmount(event.target.value)}
         />
-        <input type="submit" value="Submit" />
+        <input
+          className="Form__item Form__button"
+          type="submit"
+          value="Submit"
+        />
       </form>
+      <Link className="Deposit__link" to="/">
+        Cancel
+      </Link>
     </div>
   )
 }

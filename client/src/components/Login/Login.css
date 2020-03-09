@@ -1,0 +1,16 @@
+.Login {
+  display: flex;
+  flex-direction: column;
+}
+
+.Login__field {
+  margin: 12px 0;
+  padding: 8px;
+  border: 1px solid lightgray;
+}
+
+.Login__submit {
+  margin: 12px 0;
+  padding: 8px;
+  border: 1px solid lightgray;
+}

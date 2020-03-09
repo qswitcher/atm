@@ -1,0 +1,32 @@
+.Withdraw {
+  display: flex;
+  flex-direction: column;
+}
+
+.Withdraw__row,
+.Withdraw__link,
+.Form__item {
+  margin: 12px 0;
+  padding: 8px;
+}
+
+.Withdraw__link {
+  text-decoration: none;
+  background: lightgray;
+  color: black;
+}
+
+.Withdraw__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.Form__item {
+  border: 1px solid lightgray;
+}
+
+.Form__button {
+  background: lightgray;
+  color: black;
+  text-align: left;
+}

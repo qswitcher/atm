@@ -3,6 +3,8 @@ import { useMutation } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
 import useUser from '../../hooks/user'
 import { useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import './Withdraw.css'
 
 const WITHDRAW = gql`
   mutation Withdraw($amount: Int!, $account_id: ID!) {
@@ -44,17 +46,26 @@ const Withdraw = () => {
   }
 
   return (
-    <div>
-      <div>How much to withdraw?</div>
-      <div>{errorMsg}</div>
-      <form onSubmit={onSubmit}>
+    <div className="Withdraw">
+      <div className="Withdraw__row">How much to withdraw?</div>
+      {errorMsg && <div className="Withdraw__row">{errorMsg}</div>}
+      <form className="Withdraw__form" onSubmit={onSubmit}>
         <input
+          placeholder="Amount to withdraw"
+          className="Form__item"
           type="number"
           value={amount}
           onChange={event => setAmount(event.target.value)}
         />
-        <input type="submit" value="Submit" />
+        <input
+          className="Form__item Form__button"
+          type="submit"
+          value="Submit"
+        />
       </form>
+      <Link className="Withdraw__link" to="/">
+        Cancel
+      </Link>
     </div>
   )
 }

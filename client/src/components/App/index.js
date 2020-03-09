@@ -6,25 +6,28 @@ import Home from '../Home'
 import Deposit from '../Deposit'
 import Withdraw from '../Withdraw'
 import PrivateRoute from '../PrivateRoute'
+import './App.css'
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <PrivateRoute path="/deposit">
-          <Deposit />
-        </PrivateRoute>
-        <PrivateRoute path="/withdraw">
-          <Withdraw />
-        </PrivateRoute>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <PrivateRoute>
-          <Home />
-        </PrivateRoute>
-      </Switch>
-    </Router>
+    <div className="App">
+      <Router>
+        <Switch>
+          <PrivateRoute path="/deposit">
+            <Deposit />
+          </PrivateRoute>
+          <PrivateRoute path="/withdraw">
+            <Withdraw />
+          </PrivateRoute>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <PrivateRoute>
+            <Home />
+          </PrivateRoute>
+        </Switch>
+      </Router>
+    </div>
   )
 }
 

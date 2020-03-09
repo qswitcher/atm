@@ -1,0 +1,32 @@
+.Deposit {
+  display: flex;
+  flex-direction: column;
+}
+
+.Deposit__row,
+.Form__item,
+.Deposit__link {
+  margin: 12px 0;
+  padding: 8px;
+}
+
+.Deposit__link {
+  text-decoration: none;
+  background: lightgray;
+  color: black;
+}
+
+.Deposit__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.Form__item {
+  border: 1px solid lightgray;
+}
+
+.Form__button {
+  background: lightgray;
+  color: black;
+  text-align: left;
+}
