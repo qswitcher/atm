@@ -2,9 +2,13 @@
     base = "client/"
     publish = "build/"
     command = "npm run build"
-    
+
 [[redirects]]
   from = "/api/*"
   to = "https://nameless-crag-14482.herokuapp.com/:splat"
   status = 200
   force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
